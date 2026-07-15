@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sprite Forge Studio — AI 스프라이트시트 생성기 (데모)</title>
+<meta name="description" content="캐릭터 1장 → 게임용 액션 스프라이트시트 + Unity/멀티엔진 번들. 클릭으로 체험하는 인터랙티브 데모." />
+<meta property="og:title" content="Sprite Forge Studio" />
+<meta property="og:description" content="AI 스프라이트시트 생성기 인터랙티브 데모 — 캐릭터 선택 → 액션 → 생성 → 프리뷰 → Unity 번들 다운로드." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%235b8cff'/%3E%3Cg fill='white'%3E%3Crect x='7' y='7' width='7' height='7' rx='1.5'/%3E%3Crect x='18' y='7' width='7' height='7' rx='1.5' opacity='.7'/%3E%3Crect x='7' y='18' width='7' height='7' rx='1.5' opacity='.7'/%3E%3Crect x='18' y='18' width='7' height='7' rx='1.5'/%3E%3C/g%3E%3C/svg%3E" />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<header>
+  <div class="head-in">
+    <div class="logo">
+      <div class="logo-mark"><svg viewBox="0 0 32 32" fill="white"><rect x="7" y="7" width="7" height="7" rx="1.5"/><rect x="18" y="7" width="7" height="7" rx="1.5" opacity=".7"/><rect x="7" y="18" width="7" height="7" rx="1.5" opacity=".7"/><rect x="18" y="18" width="7" height="7" rx="1.5"/></svg></div>
+      <div>
+        <h1>Sprite Forge Studio</h1>
+        <div class="sub">image → game-ready sprite sheet</div>
+      </div>
+    </div>
+    <span class="badge-sim">◆ SIMULATION · pre-rendered assets</span>
+    <div class="head-links">
+      <a href="#how">작동 원리</a>
+      <a href="https://github.com/sylvanus4" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <h2>캐릭터 한 장을 <span class="grad">게임용 스프라이트시트</span>로.</h2>
+  <p>캐릭터를 고르고 액션을 선택하면, 걷기·달리기·점프·공격·필살기 프레임을 뽑아 균일 셀 시트로 정렬하고
+  Unity·Godot·Phaser 번들로 내보냅니다. 아래는 <strong>미리 생성된 결과를 클릭하며 체험</strong>하는 데모예요.</p>
+</section>
+
+<main>
+  <div class="studio">
+    <!-- LEFT: controls -->
+    <div>
+      <div class="panel">
+        <div class="step">Step 1 · Upload</div>
+        <h3>캐릭터 선택</h3>
+        <div class="hint">데모 캐릭터 3종 (내 기술블로그 만화 주인공).</div>
+        <div class="char-grid" id="charGrid"></div>
+        <div class="upload-note">＋ 실제 도구에서는 여기서 내 캐릭터 이미지를 업로드합니다. 데모는 사전 생성 에셋으로 시뮬레이션해요.</div>
+      </div>
+
+      <div class="panel">
+        <div class="step">Step 2 · Configure</div>
+        <h3>액션 선택</h3>
+        <div class="hint">시트에 담을 애니메이션을 고르세요.</div>
+        <div class="chips" id="actChips"></div>
+        <div class="custom-wrap">
+          <div class="row" style="margin-bottom:4px"><label>필살기 커스텀 프롬프트</label></div>
+          <input type="text" id="customPrompt" placeholder="예: 파동권 발사 / cast a fireball" value="파동권 발사" />
+        </div>
+        <div class="row" style="margin-top:14px">
+          <label>스타일</label>
+          <select id="style">
+            <option value="chibi">Chibi (기본)</option>
+            <option value="pixel">Pixel-art</option>
+            <option value="anime">Anime</option>
+            <option value="flat">Flat vector</option>
+          </select>
+        </div>
+        <div class="row">
+          <label>셀 크기</label>
+          <select id="cell">
+            <option value="64">64 × 64</option>
+            <option value="128" selected>128 × 128</option>
+            <option value="256">256 × 256</option>
+          </select>
+        </div>
+        <div class="row">
+          <label>타깃 엔진</label>
+          <select id="engine">
+            <option value="all">Unity + Godot + Phaser</option>
+            <option value="unity">Unity only</option>
+          </select>
+        </div>
+        <button class="btn" id="genBtn">✦ 스프라이트시트 생성</button>
+      </div>
+    </div>
+
+    <!-- RIGHT: stage -->
+    <div class="panel stage-wrap">
+      <div class="empty" id="empty">
+        <div>
+          <div class="ei"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+          <h4>결과가 여기에 나타납니다</h4>
+          <p>캐릭터와 액션을 고른 뒤 <strong>생성</strong>을 누르면 애니메이션 프리뷰와 스프라이트시트가 나와요.</p>
+        </div>
+      </div>
+
+      <div class="gen" id="gen">
+        <div></div>
+        <div class="gen-core">
+          <div class="gen-orb"></div>
+          <div class="gen-step" id="genStep">준비 중…</div>
+          <div class="gen-bar"><i id="genBar"></i></div>
+          <div class="gen-log" id="genLog"></div>
+        </div>
+        <div></div>
+      </div>
+
+      <div id="result" style="display:none">
+        <div class="acttabs" id="actTabs"></div>
+        <div class="stage">
+          <!-- animated preview -->
+          <div class="viewer">
+            <div class="viewer-head"><span class="live"></span> Live preview <span id="pvName" style="margin-left:auto"></span></div>
+            <canvas id="preview" width="256" height="256"></canvas>
+            <div class="viewer-ctl">
+              <div class="seg">
+                <button class="iconbtn on" id="playBtn" title="재생/일시정지"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+                <button class="iconbtn" id="loopBtn" title="루프"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></button>
+                <button class="iconbtn" id="onionBtn" title="어니언 스킨"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="12" r="6" opacity=".5"/><circle cx="15" cy="12" r="6"/></svg></button>
+              </div>
+              <div class="fps-mini"><span>fps</span><input type="range" id="fps" min="2" max="16" value="10"/><span class="val" id="fpsVal">10</span></div>
+            </div>
+          </div>
+
+          <!-- sprite sheet + export -->
+          <div>
+            <div class="sheetbox">
+              <div class="viewer-head"><span>Sprite sheet</span><span id="sheetDims" style="font-family:var(--mono)"></span></div>
+              <div class="sheet-scroll"><canvas id="sheet"></canvas></div>
+            </div>
+            <div style="margin-top:12px">
+              <div class="export-tabs" id="exportTabs">
+                <div class="et on" data-fmt="unity">Unity .meta</div>
+                <div class="et" data-fmt="frames">frames.json</div>
+                <div class="et" data-fmt="aseprite">Aseprite</div>
+              </div>
+              <pre class="code" id="exportCode">…</pre>
+            </div>
+            <div class="downloads">
+              <button class="btn" id="dlZip">⤓ 엔진 번들 (.zip)</button>
+              <button class="btn ghost" id="dlPng">⤓ 시트 PNG</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- how it works -->
+  <section class="how" id="how">
+    <h3>실제 파이프라인은 이렇게 동작합니다</h3>
+    <p class="hsub">이 데모는 사전 생성 에셋으로 클릭 체험만 하지만, 뒤에 있는 실제 파이프라인의 단계는 그대로입니다.</p>
+    <div class="pipe">
+      <div class="pstep"><div class="pn">01</div><h4>Generate</h4><p>레퍼런스 1장 → GPT Image 2로 액션별 프레임 시트 생성.</p></div>
+      <div class="pstep"><div class="pn">02</div><h4>Held-cel</h4><p>몸통은 고정, 움직일 부분만 그리게 해 프레임 간 흔들림을 줄임.</p></div>
+      <div class="pstep"><div class="pn">03</div><h4>Stabilize</h4><p>발 baseline·크기를 코드로 재정렬 — 재생해도 캐릭터가 제자리에.</p></div>
+      <div class="pstep"><div class="pn">04</div><h4>Atlas</h4><p>안정화 프레임을 균일 셀 그리드 PNG로 재패킹, pivot 산출.</p></div>
+      <div class="pstep"><div class="pn">05</div><h4>Export</h4><p>Unity .meta/.anim + frames.json/Aseprite/TexturePacker 동시 출력.</p></div>
+    </div>
+    <div class="note">이 데모의 스프라이트시트와 다운로드 번들은 <strong>브라우저에서 실제로 생성</strong>됩니다 (canvas → PNG + Unity 오토슬라이스 .meta). 시뮬레이션되는 것은 "AI 생성" 단계뿐이에요.</div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot-in">
+    <span>Sprite Forge Studio · 인터랙티브 데모 · 실제 생성 아님</span>
+    <span>Built by <a href="https://github.com/sylvanus4" target="_blank" rel="noopener">@sylvanus4</a> · MIT</span>
+  </div>
+</footer>
+
+<script src="assets/sprites.js"></script>
+<script src="assets/export.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
