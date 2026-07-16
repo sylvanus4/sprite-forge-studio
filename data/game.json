@@ -1,0 +1,75 @@
+{
+ "character": {
+  "id": "robot",
+  "ko": "로봇",
+  "name": "Bot"
+ },
+ "actions": [
+  {
+   "key": "idle",
+   "label": "대기",
+   "desc": "숨쉬기 루프",
+   "webp": "assets/game/robot/webp/idle.webp",
+   "sheet": "assets/game/robot/sheets/idle.png",
+   "frames": 16,
+   "cols": 8,
+   "rows": 2,
+   "cell": 160
+  },
+  {
+   "key": "run",
+   "label": "달리기",
+   "desc": "전진 사이클",
+   "webp": "assets/game/robot/webp/run.webp",
+   "sheet": "assets/game/robot/sheets/run.png",
+   "frames": 16,
+   "cols": 8,
+   "rows": 2,
+   "cell": 160
+  },
+  {
+   "key": "jump",
+   "label": "점프",
+   "desc": "도약→착지",
+   "webp": "assets/game/robot/webp/jump.webp",
+   "sheet": "assets/game/robot/sheets/jump.png",
+   "frames": 16,
+   "cols": 8,
+   "rows": 2,
+   "cell": 160
+  },
+  {
+   "key": "punch",
+   "label": "펀치",
+   "desc": "근접 공격",
+   "webp": "assets/game/robot/webp/punch.webp",
+   "sheet": "assets/game/robot/sheets/punch.png",
+   "frames": 16,
+   "cols": 8,
+   "rows": 2,
+   "cell": 160
+  },
+  {
+   "key": "hadouken",
+   "label": "파동권",
+   "desc": "에너지 발사 ✦",
+   "webp": "assets/game/robot/webp/hadouken.webp",
+   "sheet": "assets/game/robot/sheets/hadouken.png",
+   "frames": 16,
+   "cols": 8,
+   "rows": 2,
+   "cell": 160
+  },
+  {
+   "key": "victory",
+   "label": "승리",
+   "desc": "승리 포즈",
+   "webp": "assets/game/robot/webp/victory.webp",
+   "sheet": "assets/game/robot/sheets/victory.png",
+   "frames": 16,
+   "cols": 8,
+   "rows": 2,
+   "cell": 160
+  }
+ ]
+}
