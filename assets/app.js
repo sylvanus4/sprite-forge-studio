@@ -15,11 +15,17 @@
   var DATA = null;
   var state = { char: null, action: null, fmt: "unity" };
 
+  function hashHas(s) { return location.hash.toLowerCase().indexOf(s) >= 0; }
+
   fetch("data/game.json").then(function (r) { return r.json(); }).then(function (d) {
-    DATA = d; state.char = d.characters[0]; boot();
+    DATA = d;
+    state.char = d.characters.filter(function (c) { return hashHas(c.id); })[0] || d.characters[0];
+    boot();
   }).catch(function (e) { $("#empty").innerHTML = "<div><h4>로드 실패</h4><p>" + e + "</p></div>"; });
 
-  function boot() { buildChars(); wire(); if (location.hash === "#demo") setTimeout(generate, 150); }
+  // deep-link: #demo auto-generates; add an action key (e.g. #demo-hadouken or
+  // #demo-scientist-hadouken) to preselect that character/move for sharing.
+  function boot() { buildChars(); wire(); if (hashHas("demo")) setTimeout(generate, 150); }
 
   function buildChars() {
     var grid = $("#charGrid"); grid.innerHTML = "";
@@ -88,7 +94,13 @@
       tabs.appendChild(t);
     });
     $("#result").style.display = "block";
-    setAction(state.char.actions[0]);
+    var pick = state.char.actions.filter(function (a) { return hashHas(a.key); })[0];
+    if (pick) {
+      setAction(pick);
+      els(".acttab", tabs).forEach(function (x, i) { x.classList.toggle("on", state.char.actions[i].key === pick.key); });
+    } else {
+      setAction(state.char.actions[0]);
+    }
   }
 
   function setAction(a) {
