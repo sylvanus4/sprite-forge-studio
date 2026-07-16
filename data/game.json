@@ -1,75 +1,226 @@
 {
- "character": {
-  "id": "robot",
-  "ko": "로봇",
-  "name": "Bot"
- },
- "actions": [
+ "characters": [
   {
-   "key": "idle",
-   "label": "대기",
-   "desc": "숨쉬기 루프",
-   "webp": "assets/game/robot/webp/idle.webp",
-   "sheet": "assets/game/robot/sheets/idle.png",
-   "frames": 16,
-   "cols": 8,
-   "rows": 2,
-   "cell": 160
+   "id": "robot",
+   "ko": "로봇",
+   "name": "Bot",
+   "final": true,
+   "actions": [
+    {
+     "key": "idle",
+     "label": "대기",
+     "desc": "숨쉬기 루프",
+     "webp": "assets/game/robot/webp/idle.webp",
+     "sheet": "assets/game/robot/sheets/idle.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "run",
+     "label": "달리기",
+     "desc": "전진 사이클",
+     "webp": "assets/game/robot/webp/run.webp",
+     "sheet": "assets/game/robot/sheets/run.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "jump",
+     "label": "점프",
+     "desc": "도약→착지",
+     "webp": "assets/game/robot/webp/jump.webp",
+     "sheet": "assets/game/robot/sheets/jump.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "dash",
+     "label": "대시",
+     "desc": "고속 이동 ✦",
+     "webp": "assets/game/robot/webp/dash.webp",
+     "sheet": "assets/game/robot/sheets/dash.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "punch",
+     "label": "펀치",
+     "desc": "근접 공격",
+     "webp": "assets/game/robot/webp/punch.webp",
+     "sheet": "assets/game/robot/sheets/punch.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "guard",
+     "label": "가드",
+     "desc": "방어 ✦",
+     "webp": "assets/game/robot/webp/guard.webp",
+     "sheet": "assets/game/robot/sheets/guard.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "hit",
+     "label": "피격",
+     "desc": "피격 리코일 ✦",
+     "webp": "assets/game/robot/webp/hit.webp",
+     "sheet": "assets/game/robot/sheets/hit.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "hadouken",
+     "label": "파동권",
+     "desc": "에너지 발사 ✦",
+     "webp": "assets/game/robot/webp/hadouken.webp",
+     "sheet": "assets/game/robot/sheets/hadouken.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "victory",
+     "label": "승리",
+     "desc": "승리 포즈",
+     "webp": "assets/game/robot/webp/victory.webp",
+     "sheet": "assets/game/robot/sheets/victory.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    }
+   ]
   },
   {
-   "key": "run",
-   "label": "달리기",
-   "desc": "전진 사이클",
-   "webp": "assets/game/robot/webp/run.webp",
-   "sheet": "assets/game/robot/sheets/run.png",
-   "frames": 16,
-   "cols": 8,
-   "rows": 2,
-   "cell": 160
-  },
+   "id": "scientist",
+   "ko": "박사",
+   "name": "Dr. Park",
+   "final": true,
+   "actions": [
+    {
+     "key": "idle",
+     "label": "대기",
+     "desc": "숨쉬기 루프",
+     "webp": "assets/game/scientist/webp/idle.webp",
+     "sheet": "assets/game/scientist/sheets/idle.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "run",
+     "label": "달리기",
+     "desc": "전진 사이클",
+     "webp": "assets/game/scientist/webp/run.webp",
+     "sheet": "assets/game/scientist/sheets/run.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "jump",
+     "label": "점프",
+     "desc": "도약→착지",
+     "webp": "assets/game/scientist/webp/jump.webp",
+     "sheet": "assets/game/scientist/sheets/jump.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "dash",
+     "label": "대시",
+     "desc": "고속 이동 ✦",
+     "webp": "assets/game/scientist/webp/dash.webp",
+     "sheet": "assets/game/scientist/sheets/dash.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "punch",
+     "label": "펀치",
+     "desc": "근접 공격",
+     "webp": "assets/game/scientist/webp/punch.webp",
+     "sheet": "assets/game/scientist/sheets/punch.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "guard",
+     "label": "가드",
+     "desc": "방어 ✦",
+     "webp": "assets/game/scientist/webp/guard.webp",
+     "sheet": "assets/game/scientist/sheets/guard.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "hit",
+     "label": "피격",
+     "desc": "피격 리코일 ✦",
+     "webp": "assets/game/scientist/webp/hit.webp",
+     "sheet": "assets/game/scientist/sheets/hit.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "hadouken",
+     "label": "파동권",
+     "desc": "에너지 발사 ✦",
+     "webp": "assets/game/scientist/webp/hadouken.webp",
+     "sheet": "assets/game/scientist/sheets/hadouken.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    },
+    {
+     "key": "victory",
+     "label": "승리",
+     "desc": "승리 포즈",
+     "webp": "assets/game/scientist/webp/victory.webp",
+     "sheet": "assets/game/scientist/sheets/victory.png",
+     "frames": 16,
+     "cols": 8,
+     "rows": 2,
+     "cell": 160
+    }
+   ]
+  }
+ ],
+ "wip": [
   {
-   "key": "jump",
-   "label": "점프",
-   "desc": "도약→착지",
-   "webp": "assets/game/robot/webp/jump.webp",
-   "sheet": "assets/game/robot/sheets/jump.png",
-   "frames": 16,
-   "cols": 8,
-   "rows": 2,
-   "cell": 160
-  },
-  {
-   "key": "punch",
-   "label": "펀치",
-   "desc": "근접 공격",
-   "webp": "assets/game/robot/webp/punch.webp",
-   "sheet": "assets/game/robot/sheets/punch.png",
-   "frames": 16,
-   "cols": 8,
-   "rows": 2,
-   "cell": 160
-  },
-  {
-   "key": "hadouken",
-   "label": "파동권",
-   "desc": "에너지 발사 ✦",
-   "webp": "assets/game/robot/webp/hadouken.webp",
-   "sheet": "assets/game/robot/sheets/hadouken.png",
-   "frames": 16,
-   "cols": 8,
-   "rows": 2,
-   "cell": 160
-  },
-  {
-   "key": "victory",
-   "label": "승리",
-   "desc": "승리 포즈",
-   "webp": "assets/game/robot/webp/victory.webp",
-   "sheet": "assets/game/robot/sheets/victory.png",
-   "frames": 16,
-   "cols": 8,
-   "rows": 2,
-   "cell": 160
+   "id": "developer",
+   "ko": "개발자",
+   "name": "Dev",
+   "thumb": "assets/emoticons/developer/wave.webp"
   }
  ]
 }
